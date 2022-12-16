@@ -2,10 +2,11 @@ const { response } = require('express');
 const express = require('express');
 const app = express();
 
-app.get('/', (require, response) => {
-    return response.json({
-        message: 'Olá Dev! Brm vindo ao curso!'
-    });
+app.get('/projects', (require, response) => {
+    return response.json([
+        'Porjeto 1',
+        'Projeto 2'
+    ]);
 });
 
 app.listen(3000, () => {
