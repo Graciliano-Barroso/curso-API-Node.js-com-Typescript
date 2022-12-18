@@ -1,8 +1,11 @@
-const { response } = require('express');
+const { response, request } = require('express');
 const express = require('express');
 const app = express();
 
-app.get('/projects', (require, response) => {
+app.get('/projects', (request, response) => {
+    const {title, owner, page} = request.query;
+    console.log(title, owner, page);
+
     return response.json([
         'Porjeto 1',
         'Projeto 2'
