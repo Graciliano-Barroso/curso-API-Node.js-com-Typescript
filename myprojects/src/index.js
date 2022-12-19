@@ -20,7 +20,10 @@ app.post('/projects', (require, response) => {
     ]);
 });
 
-app.put('/projects/:id', (require, response) => {
+app.put('/projects/:id/:name', (request, response) => {
+    const {id, name} = request.params;
+    console.log(id, name);
+
     return response.json([
         'Porjeto 4',
         'Projeto 2',
