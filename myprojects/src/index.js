@@ -26,13 +26,26 @@ app.post('/projects', (request, response) => {
 app.put('/projects/:id', (request, response) => {
     const {id} = request.params;
     const {name, owner} = request.body;
-    console.log(id, name, owner);
+    
+    const projectIndex = projects.findIndex(p => p.id === id);
 
-    return response.json([
-        'Porjeto 4',
-        'Projeto 2',
-        'Projeto 3'
-    ]);
+    if (projectIndex < 0) {
+        return response.status(404).json({ error: 'Project not found' });
+    }
+
+    if (!name || !owner) {
+        return response.status(400).json({ error: 'Name and owner are required' });
+    }
+
+    const project = {
+        id,
+        name,
+        owner
+    }
+
+    projects[projectIndex] = project;
+
+    return response.json(project);
 });
 
 app.delete('/projects/:id', (require, response) => {
