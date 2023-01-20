@@ -8,7 +8,7 @@ rolesRouter.post("/", (request, response) => {
   const { name } = request.body;
   const roleAlreadyExists = rolesRepository.findByName(name);
   if (roleAlreadyExists) {
-    return response.status(400).json({error: 'Role already exists'});
+    return response.status(400).json({ error: "Role already exists" });
   }
   const role = rolesRepository.create({ name });
 
