@@ -1,0 +1,10 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MyAPI Documentatiom",
+    "description": "MyAPI Documentation with all specification",
+    "version": "1.0.0",
+    "contact": "Graciliano Barroso",
+    "email": "graciliano.barroso.moraes@gmail.com"
+  }
+}
