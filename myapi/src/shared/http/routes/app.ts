@@ -1,12 +1,10 @@
-import "dotenv/config";
-import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 import cors from "cors";
-import { routes } from "./routes";
+import { routes } from ".";
 import { AppError } from "@shared/errors/AppError";
-import swaggerFile from "../../swaegger.json";
+import swaggerFile from "../../../swaegger.json";
 
 const app = express();
 app.use(cors());
@@ -30,6 +28,4 @@ app.use(
   },
 );
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server started on port ${process.env.PORT}! 🏆`);
-});
+export { app };
