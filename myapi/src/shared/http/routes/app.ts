@@ -4,7 +4,7 @@ import swaggerUi from "swagger-ui-express";
 import cors from "cors";
 import { routes } from ".";
 import { AppError } from "@shared/errors/AppError";
-import swaggerFile from "../../../swaegger.json";
+import swaggerFile from "../../../swagger.json";
 
 const app = express();
 app.use(cors());
