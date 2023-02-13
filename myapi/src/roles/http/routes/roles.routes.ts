@@ -1,12 +1,18 @@
-import { createRolesController } from "@roles/useCases/createRole";
-import { deleteRolesController } from "@roles/useCases/deleteRole";
-import { listRolesController } from "@roles/useCases/listRoles";
-import { showRolesController } from "@roles/useCases/showRole";
-import { upadateRolesController } from "@roles/useCases/updateRole";
+import { container } from "tsyringe";
 import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
+import { CreateRoleController } from "@roles/useCases/createRole/CreateRoleController";
+import { ListRolesController } from "@roles/useCases/listRoles/ListRolesController";
+import { ShowRoleController } from "@roles/useCases/showRole/ShowRoleController";
+import { DeleteRoleController } from "@roles/useCases/deleteRole/DeleteRoleController";
+import { UpdateRoleController } from "@roles/useCases/updateRole/UpdateRoleController";
 
 const rolesRouter = Router();
+const createRolesController = container.resolve(CreateRoleController);
+const listRolesController = container.resolve(ListRolesController);
+const showRolesController = container.resolve(ShowRoleController);
+const updateRolesController = container.resolve(UpdateRoleController);
+const deleteRolesController = container.resolve(DeleteRoleController);
 
 rolesRouter.post(
   "/",
@@ -56,7 +62,7 @@ rolesRouter.put(
     }),
   }),
   (request, response) => {
-    return upadateRolesController.handle(request, response);
+    return updateRolesController.handle(request, response);
   },
 );
 

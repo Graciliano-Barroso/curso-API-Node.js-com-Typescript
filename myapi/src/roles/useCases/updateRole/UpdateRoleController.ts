@@ -1,8 +1,8 @@
 import { container } from "tsyringe";
 import { Request, Response } from "express";
-import { UpdateRoleUseCase } from "./UpadateRoleUseCase";
+import { UpdateRoleUseCase } from "./UpdateRoleUseCase";
 
-export class UpadateRoleController {
+export class UpdateRoleController {
   async handle(request: Request, response: Response): Promise<Response> {
     const updateRoleUseCase = container.resolve(UpdateRoleUseCase);
     const { id } = request.params;
