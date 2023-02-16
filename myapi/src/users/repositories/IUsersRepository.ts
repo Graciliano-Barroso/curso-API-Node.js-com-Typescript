@@ -1,3 +1,4 @@
+import { Role } from "@roles/entities/Role";
 import { User } from "@users/entities/User";
 
 export type CreateUserDTO = {
@@ -5,7 +6,7 @@ export type CreateUserDTO = {
   email: string;
   password: string;
   isAdmin: boolean;
-  roleId: string;
+  role: Role;
 };
 
 export type PaginateParams = {
@@ -27,7 +28,7 @@ export interface IUsersRepository {
     email,
     password,
     isAdmin,
-    roleId,
+    role,
   }: CreateUserDTO): Promise<User>;
   save(user: User): Promise<User>;
   findAll({
