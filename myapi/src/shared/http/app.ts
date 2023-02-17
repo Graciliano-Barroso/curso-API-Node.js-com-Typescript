@@ -3,9 +3,9 @@ import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 import cors from "cors";
 import { errors } from "celebrate";
-import { routes } from ".";
+import { routes } from "./routes";
 import { AppError } from "@shared/errors/AppError";
-import swaggerFile from "../../../swagger.json";
+import swaggerFile from "../../swagger.json";
 import "@shared/container";
 
 const app = express();
