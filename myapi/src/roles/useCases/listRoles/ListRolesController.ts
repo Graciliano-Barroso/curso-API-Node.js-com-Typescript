@@ -2,7 +2,7 @@ import { container } from "tsyringe";
 import { Request, Response } from "express";
 import { ListRolesUseCase } from "./ListRolesUseCase";
 
-export class ListUsersController {
+export class ListRolesController {
   async handle(request: Request, response: Response): Promise<Response> {
     const listRolesUseCase = container.resolve(ListRolesUseCase);
     const page =
