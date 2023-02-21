@@ -4,6 +4,7 @@ import { CreateLoginController } from "@users/useCases/createLogin/CreateLoginCo
 import { celebrate, Joi, Segments } from "celebrate";
 import { Router } from "express";
 import { container } from "tsyringe";
+import { isAuthenticated } from "@shared/http/middlewares/isAuthenticated";
 
 const usersRouter = Router();
 const createUserController = container.resolve(CreateUserController);
@@ -12,6 +13,7 @@ const createLoginController = container.resolve(CreateLoginController);
 
 usersRouter.post(
   "/",
+  isAuthenticated,
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -28,6 +30,7 @@ usersRouter.post(
 
 usersRouter.get(
   "/",
+  isAuthenticated,
   celebrate({
     [Segments.QUERY]: {
       page: Joi.number(),
