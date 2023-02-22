@@ -6,8 +6,8 @@ import { CreateUserController } from "@users/useCases/createUser/CreateUserContr
 import { ListUsersController } from "@users/useCases/listUsers/ListUsersController";
 import { CreateLoginController } from "@users/useCases/createLogin/CreateLoginController";
 import { isAuthenticated } from "@shared/http/middlewares/isAuthenticated";
-import uploadConfig from "@config/upload";
 import { UpdateAvatarController } from "@users/useCases/updateAvatar/UpadateAvatarController";
+import uploadConfig from "@config/upload";
 
 const usersRouter = Router();
 const createUserController = container.resolve(CreateUserController);
