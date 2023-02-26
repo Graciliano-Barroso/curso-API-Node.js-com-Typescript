@@ -9,9 +9,9 @@ export type CreateRefreshTokenDTO = {
 
 export interface IRefreshTokenRepository {
   create({
-    user_id,
-    token,
     expires,
+    token,
+    user_id,
     valid,
   }: CreateRefreshTokenDTO): Promise<RefreshToken>;
   findByToken(token: string): Promise<RefreshToken | null>;

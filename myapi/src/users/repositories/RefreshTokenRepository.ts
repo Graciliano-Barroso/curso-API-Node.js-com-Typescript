@@ -1,4 +1,4 @@
-import { RefreshToken } from './../entities/RefreshToken';
+import { AppError } from "@shared/errors/AppError";
 import { dataSource } from "@shared/typeorm";
 import { RefreshToken } from "@users/entities/RefreshToken";
 import { Repository } from "typeorm";
@@ -6,7 +6,6 @@ import {
   CreateRefreshTokenDTO,
   IRefreshTokenRepository,
 } from "./IRefreshTokenRepository";
-import { AppError } from '@shared/errors/AppError';
 
 export class RefreshTokenRepository implements IRefreshTokenRepository {
   private repository: Repository<RefreshToken>;
@@ -16,15 +15,15 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
   }
 
   async create({
-    user_id,
-    token,
     expires,
+    token,
+    user_id,
     valid,
   }: CreateRefreshTokenDTO): Promise<RefreshToken> {
     const refreshToken = this.repository.create({
-      user_id,
-      token,
       expires,
+      token,
+      user_id,
       valid,
     });
     return this.repository.save(refreshToken);
