@@ -36,7 +36,7 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
   async invalidate(refresh_token: RefreshToken): Promise<void> {
     const refreshToken = await this.findByToken(refresh_token.token);
     if (!refreshToken) {
-      throw new AppError("Refresh Token not found");
+      throw new AppError("Refresh Token not found", 404);
     }
     refreshToken.valid = false;
     await this.repository.save(refreshToken);

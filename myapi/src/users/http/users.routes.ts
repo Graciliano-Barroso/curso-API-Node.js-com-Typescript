@@ -2,6 +2,7 @@ import { Router } from "express";
 import { celebrate, Joi, Segments } from "celebrate";
 import { container } from "tsyringe";
 import multer from "multer";
+import { appUserInfoToRequest } from "./middlewares/addUserInfoToRequest";
 import { CreateUserController } from "@users/useCases/createUser/CreateUserController";
 import { ListUsersController } from "@users/useCases/listUsers/ListUsersController";
 import { CreateLoginController } from "@users/useCases/createLogin/CreateLoginController";
@@ -10,6 +11,7 @@ import { UpdateAvatarController } from "@users/useCases/updateAvatar/UpadateAvat
 import uploadConfig from "@config/upload";
 import { ShowProfileController } from "@users/useCases/showProfile/ShowProfileController";
 import { UpdateProfileController } from "@users/useCases/updateProfile/UpdateProfileController";
+import { CreateAccessAndRefreshTokenController } from "@users/useCases/createAccessAndRefreshToken/CreateAccessAndRefreshTokenController";
 
 const usersRouter = Router();
 const createUserController = container.resolve(CreateUserController);
@@ -18,6 +20,10 @@ const createLoginController = container.resolve(CreateLoginController);
 const updateAvatarController = container.resolve(UpdateAvatarController);
 const showProfileController = container.resolve(ShowProfileController);
 const updateProfileController = container.resolve(UpdateProfileController);
+const createAccessAndRefreshTokenController = container.resolve(
+  CreateAccessAndRefreshTokenController,
+);
+
 const upload = multer(uploadConfig);
 
 usersRouter.post(
@@ -61,6 +67,19 @@ usersRouter.post(
   }),
   (request, response) => {
     return createLoginController.handle(request, response);
+  },
+);
+
+usersRouter.post(
+  "/refresh_token",
+  appUserInfoToRequest,
+  celebrate({
+    [Segments.BODY]: {
+      refresh_token: Joi.string().required(),
+    },
+  }),
+  (request, response) => {
+    return createAccessAndRefreshTokenController.handle(request, response);
   },
 );
 

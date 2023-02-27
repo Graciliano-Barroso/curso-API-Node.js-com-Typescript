@@ -28,6 +28,7 @@ export const appUserInfoToRequest = (
   }
   try {
     const decodedToken = decode(token);
+    console.log(decodedToken);
     const { sub } = decodedToken as JwtPayloadProps;
     request.user = { id: sub };
     return next();

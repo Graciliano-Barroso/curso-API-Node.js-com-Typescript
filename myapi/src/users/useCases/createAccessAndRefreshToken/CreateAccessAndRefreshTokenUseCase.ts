@@ -1,10 +1,10 @@
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
-import jwtConfig from "@config/auth";
 import { AppError } from "@shared/errors/AppError";
 import { User } from "@users/entities/User";
 import { IRefreshTokenRepository } from "@users/repositories/IRefreshTokenRepository";
 import { IUsersRepository } from "@users/repositories/IUsersRepository";
+import jwtConfig from "@config/auth";
 
 type CreateAccessAndRefreshTokenDTO = {
   user_id: string;
@@ -30,6 +30,7 @@ export class CreateAccessAndRefreshTokenUseCase {
     refresh_token,
   }: CreateAccessAndRefreshTokenDTO): Promise<IResponse> {
     const user = await this.usersRespository.findById(user_id);
+    console.log(user_id);
     if (!user) {
       throw new AppError("User not found", 404);
     }
@@ -44,7 +45,7 @@ export class CreateAccessAndRefreshTokenUseCase {
       !refreshTokenExists.valid ||
       refreshTokenExists.expires.getTime() < dateNow
     ) {
-      throw new AppError("Refresh token is invali or expired", 401);
+      throw new AppError("Refresh token is invalid or expired", 401);
     }
     await this.refreshTokenRepository.invalidate(refreshTokenExists);
     const accessToken = sign({}, jwtConfig.jwt.secret, {
